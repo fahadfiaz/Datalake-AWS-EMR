@@ -1,15 +1,15 @@
 # Project: Data Lake
------
+
 ETL pipeline for a data lake hosted on S3. It load data from S3, process the data into analytics tables using Spark running on ```AWS EMR cluster``` and load them back into S3. 
 
 ## Introduction
-----
+
 A music streaming startup, Sparkify, has grown their user base and song database even more and want to move their data warehouse to a data lake. Their data resides in S3, in a directory of JSON logs on user activity on the app, as well as a directory with JSON metadata on the songs in their app.
 
 As their data engineer, my task was to build an ETL pipeline that extracts their data from S3, processes them using Spark, and loads the data back into S3 as a set of dimensional tables. This will allow their analytics team to continue finding insights in what songs their users are listening to.
 
 ## Datasets
----
+
 Following two datasets are used to ingest the data into data lake. Each dataset resides in S3 bucket: 
 1) **Song Dataset**: The first dataset is a subset of real data from the Million Song Dataset. Each file is in JSON format and contains metadata about a song and the artist of that song. The files are partitioned by the first three letters of each song's track ID. For example, here are file paths to two files in this dataset.
 ```song_data/A/B/C/TRABCEI128F424C983.json```
@@ -34,12 +34,12 @@ Using the song and log datasets, I created a star schema optimized for queries o
 - The **time** dimension table stores timestamps of records in songplays broken down into specific units
 
 ## Description of the Project Files
----
+
 1) **etl.py** : This file contains the ETL pipeline that loads the songs and log data from S3 bucket, processes it using Spark and stores it back to S3 in the parquet format.  
 2) **dl.cfg**: This file contains the AWS IAM credentials.
 
 ## Instructions to run python scripts
----
+
 -  Create an AWS IAM role with S3 read and write access. Then, edit the ```dl.cfg``` configuration file and put the newly created IAM credentials in it. 
 - Create an S3 Bucket to store the dimensional tables in parquet format. Then, edit the ```etl.py``` file and replace the output data path with the newly created s3 Bucket path.
 - Run ```etl.py``` file that loads the songs and log data from S3 bucket, processes it using Spark and stores it back to S3 in the parquet format.  
